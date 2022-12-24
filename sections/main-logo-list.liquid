@@ -1,0 +1,36 @@
+<h2>{{ section.settings.logo_header }}</h2>
+<img>
+{{section.settings.logo}}
+</img>
+
+
+
+{% schema %}
+  {
+    "name": "logo-container",
+    "tag": "section",
+    "class": "logo-list",
+    "settings": [
+      {
+        "type": "text",
+        "id": "logo_header",
+        "label": "Logo Heading",
+        "default": "Logo List"
+      }, {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo",
+        "info": "700 * 700 .jpg recommended"
+      }, {
+        "type": "url",
+        "id": "img_url",
+        "label": "Img Url"
+      }
+],
+      "presets": [
+      {
+        "name": "logo-list"
+      }
+    ]
+  }
+{% endschema %}

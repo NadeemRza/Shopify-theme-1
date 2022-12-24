@@ -1,0 +1,22 @@
+<product-card-new class="product-card" data-handle="{{ product.handle }}">
+  <div>
+    {% for image in product.images limit: 1 %}
+      <div class="featured_img">
+        {% assign prod_media = product.media %}
+        {{ prod_media[0] | img_tag }}
+      </div>
+    {% endfor %}
+  </div>
+  <div>
+    <h2>{{ product.title }}</h2>
+    <p>
+      <span>{{ product.price }}</span>
+      <span>
+        <s>{{ product.compare_at_price_max }}</s>
+      </span>
+    </p>
+  </div>
+  <div>
+    <button class="btn--custom">Add To Cart</button>
+  </div>
+</product-card-new>

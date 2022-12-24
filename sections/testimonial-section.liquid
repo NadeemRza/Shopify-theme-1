@@ -1,0 +1,178 @@
+{% if section.blocks.size > 0 %}
+  {% for block in section.blocks %}
+    <div class="testimonial-container {{block.settings.text_alignment}}" data-flickity='{ "cellAlign": "left", "contain": true }'>
+      <div class="testimonial-items">
+        <h3 class="h3 {{block.settings.heading_alignment}}">{{ block.settings.top_heading_text }}</h3>
+        <h1 class="testimonial-section__heading {{block.settings.heading_alignment}}">{{ block.settings.heading_text }}</h1>
+        <div class="image-container">
+          {% assign mobile_image = block.settings.image_mobile | default: block.settings.image %}
+          {% render 'image', class: 'media media--circle', mobileSrc: mobile_image, desktopSrc: block.settings.image %}
+        </div>
+        {% if block.settings.author_rating != blank %}
+          <div class="pt-1 fs-2">
+            {% case block.settings.author_rating %}
+              {% when "1 Star" %}
+              &#9733;
+              {% when "2 Star" %}
+              &#9733;&#9733;
+              {% when "3 Star" %}
+              &#9733;&#9733;&#9733;
+              {% when "4 Star" %}
+              &#9733;&#9733;&#9733;&#9733;
+            {% else %}
+              &#9733;&#9733;&#9733;&#9733;&#9733;
+            {% endcase %}
+          </div>
+        {% endif %}
+        <p>{{ block.settings.paragraph_text }}</p>
+        <h5 class="testimonial-section__author-info">
+          {{ block.settings.author_info }}/{{ block.settings.author_city }}
+        </h5>
+      </div>
+    </div>
+  {% endfor %}
+{% endif %}
+
+{% style %}
+  {% for block in section.blocks %}
+    .testimonial-container {
+      background-color: {{ block.settings.background_color}}
+      ;
+    }
+  {% endfor %}
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "testimonial section",
+    "class": "homepage section",
+    "blocks": [
+      {
+        "name": "Review Block",
+        "type": "review_block",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Headings"
+          },
+          {
+            "type": "text",
+            "id": "top_heading_text",
+            "label": "Top Heading Text",
+            "default": "DIRECT FROM THE CUSTOMERS"
+          },
+          {
+            "type": "text",
+            "id": "heading_text",
+            "label": "Heading Text",
+            "default": "5 STAR FEEDBACK"
+          },
+          {
+            "type": "select",
+            "id": "heading_alignment",
+            "label": "Heading Alignment",
+            "options": [
+              {
+                "value": "align-left",
+                "label": "Left"
+              }, {
+                "value": "align-center",
+                "label": "Center"
+              }, {
+                "value": "align-right",
+                "label": "Right"
+              }
+            ],
+            "default": "align-center"
+          }, {
+            "type": "header",
+            "content": "Image"
+          }, {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }, {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image (Mobile)",
+            "info": "600 x 800px .jpg recommended"
+          }, {
+            "type": "header",
+            "content": "Content"
+          }, {
+            "type": "select",
+            "id": "text_alignment",
+            "label": "Text Alignment",
+            "options": [
+              {
+                "value": "left-align",
+                "label": "Left"
+              }, {
+                "value": "center-align",
+                "label": "Center"
+              }, {
+                "value": "right-align",
+                "label": "Right"
+              }
+            ],
+            "default": "center-align"
+          }, {
+            "type": "color",
+            "id": "background_color",
+            "label": "Background color",
+            "default": "#ece2cc"
+          }, {
+            "type": "select",
+            "id": "author_rating",
+            "label": "Author Rating",
+            "options": [
+              {
+                "value": "1 Star",
+                "label": "1 Star"
+              },
+              {
+                "value": "2 Star",
+                "label": "2 Star"
+              },
+              {
+                "value": "3 Star",
+                "label": "3 Star"
+              },
+              {
+                "value": "4 Star",
+                "label": "4 Star"
+              }, {
+                "value": "5 Star",
+                "label": "5 Star"
+              }, {
+                "value": "",
+                "label": ""
+              }
+            ],
+            "default": "5 Star"
+          }, {
+            "type": "textarea",
+            "id": "paragraph_text",
+            "label": "Paragraph Text",
+            "default": "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit Atque voluptate ullam sint!</p>"
+          }, {
+            "type": "text",
+            "id": "author_info",
+            "label": "Author Info",
+            "default": "Maria Smith"
+          }, {
+            "type": "text",
+            "id": "author_city",
+            "label": "Author City",
+            "default": "London"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "testimonial section"
+      }
+    ]
+  }
+{% endschema %}

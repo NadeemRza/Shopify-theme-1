@@ -1,0 +1,98 @@
+<div class="bg_img-{{section.id}} text-align-{{section.id}}">
+  <h2>{{ section.settings.heading_text }}</h2>
+  <p>{{ section.settings.para_text }}</p>
+  <a class="button button-{{ section.id }}" href="{{ section.settings.button_link }}">
+    {{ section.settings.button_text }}
+  </a>
+</div>
+
+{% liquid
+assign mobile_image = section.settings.image_mobile | default: section.settings.bcg_img  
+render 'image', mobileSrc: mobile_image, desktopSrc: section.settings.bcg_img
+%}
+
+{% style %}
+  .button-{{ section.id}}{
+    background: ;
+    color: {{ section.settings.button_text_color }}
+  }
+  .bg_img-{{ section.id}}{
+    background: url('mobile_image');
+  }
+  .text-align-{{ section.id}}{
+    text-align: {{ section.settings.text_alignment }}
+    ;
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "img_text_overlay",
+    "class": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading_text",
+        "label": "Heading",
+        "default": "Decorate your home"
+      },
+      {
+        "type": "text",
+        "id": "para_text",
+        "label": "Paragraph",
+        "default": "Discover our accessories to create a beautiful home"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text",
+        "default": "Shop Home Decor"
+      },
+      {
+        "type": "color",
+        "id": "button_text_color",
+        "label": "Button text color"
+      }, {
+        "type": "color",
+        "id": "button_background_color",
+        "label": "Button background color"
+      }, {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }, {
+        "type": "select",
+        "id": "text_alignment",
+        "label": "Text alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          }, {
+            "value": "center",
+            "label": "Center"
+          }, {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center"
+      }, {
+        "type": "image_picker",
+        "id": "bcg_img",
+        "label": "Background Image"
+      }, {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Image (Mobile)",
+        "info": "600 x 800px .jpg recommended"
+      }
+    ],
+
+    "presets": [
+      {
+        "name": "img_text_overlays"
+      }
+    ]
+  }
+{% endschema %}

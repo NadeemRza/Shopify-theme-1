@@ -1,0 +1,128 @@
+<div class="image-text container">
+  <div class="flex-box align-center {{section.settings.image_position}}">
+    <div class="flexbox_item">
+      <div class="image-text_image">
+        {% assign mobile_image = section.settings.image_mobile | default: section.settings.image %}
+        {% render 'image', class: '', mobileSrc: mobile_image, desktopSrc: section.settings.image %}
+      </div>
+    </div>
+    <div class="flexbox_item">
+      <div class="image-text__content {{section.settings.text_alignment}}">
+        {% if section.settings.caption_text != blank %}
+          <div class="image-text__caption">{{ section.settings.caption_text }}</div>
+        {% endif %}
+
+        {% if section.settings.heading_text != blank %}
+          <h2 class="image-text__heading">{{ section.settings.heading_text }}</h2>
+        {% endif %}
+
+        {% if section.settings.para_text != blank %}
+          <div class="image-text__paragraph">{{ section.settings.para_text }}</div>
+        {% endif %}
+
+        {% if section.settings.button_link != blank or section.settings.button_text != blank %}
+          <div class="image-text__button">
+            <a class="button button--primary" href="{{section.settings.button_link}}">
+              {{ section.settings.button_text }}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% liquid
+assign mobile_image = section.settings.image_mobile | default: section.settings.bcg_img  
+render 'image', mobileSrc: mobile_image, desktopSrc: section.settings.bcg_img
+%}
+
+{% schema %}
+  {
+    "name": "image with text",
+    "tag": "section",
+    "class": "homepage-section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Image Settings"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Image (Mobile)",
+        "info": "600 x 800px .jpg recommended"
+      },
+      {
+        "type": "select",
+        "id": "image_position",
+        "label": "Image Position",
+        "options": [
+          {
+            "value": "left-align",
+            "label": "Left"
+          }, {
+            "value": "right-align",
+            "label": "Right"
+          }
+        ],
+        "default": "left-align"
+      }, {
+        "type": "header",
+        "content": "Content Settings"
+      }, {
+        "type": "text",
+        "id": "caption_text",
+        "label": "Caption Text",
+        "default": "Info"
+      }, {
+        "type": "text",
+        "id": "heading_text",
+        "label": "Heading Text",
+        "default": "About Comapny"
+      }, {
+        "type": "richtext",
+        "id": "paragraph_text",
+        "label": "Paragraph Text",
+        "default": "<p>lorem ipsum sit emit fg khf lorem ipsum sit amit lorem ipsum sit amit</p>"
+      }, {
+        "type": "text",
+        "id": "button_text",
+        "label": "Text",
+        "default": "Our Products"
+      }, {
+        "type": "url",
+        "id": "button_link",
+        "label": "Link"
+      }, {
+        "type": "select",
+        "id": "text_alignment",
+        "label": "Text Alignment",
+        "options": [
+          {
+            "value": "text-left",
+            "label": "Left"
+          }, {
+            "value": "text-center",
+            "label": "Center"
+          }, {
+            "value": "text-right",
+            "label": "Right"
+          }
+        ],
+        "default": "text-center"
+      }
+
+    ],
+    "presets": [
+      {
+        "name": "image with text"
+      }
+    ]
+  }
+{% endschema %}

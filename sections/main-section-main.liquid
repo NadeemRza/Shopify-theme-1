@@ -1,0 +1,87 @@
+<div class="text-align-{{ section.id}}">
+  <h2>{{ section.settings.heading_text }}</h2>
+  <p>{{ section.settings.para_text }}</p>
+  <a class="button button-{{ section.id }}" href="{{ section.settings.button_link }}">
+    {{ section.settings.button_text }}
+  </a>
+</div>
+
+{% style %}
+  .button-{{ section.id}}{
+    background: {{ section.settings.button_background_color}}
+    ;
+    color: {{ section.settings.button_text_color }}
+    ;
+  };
+  .text-align-{{ section.id}}{
+    text-align: {{ section.settings.text_alignment }}
+    ;
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "top_section",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading_text",
+        "label": "Heading text",
+        "default": "About Company"
+      },
+      {
+        "type": "text",
+        "id": "para_text",
+        "label": "Paragraph",
+        "default": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text",
+        "default": "Discover Our Catalogue"
+      },
+      {
+        "type": "color",
+        "id": "button_text_color",
+        "label": "Button text color"
+      }, {
+        "type": "color",
+        "id": "button_background_color",
+        "label": "Button background color"
+      }, {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }, {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background Color"
+      }, {
+        "type": "select",
+        "id": "text_alignment",
+        "label": "Text alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          }, {
+            "value": "center",
+            "label": "Center"
+          }, {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center"
+      }
+    ],
+    "presets": [
+      {
+        "name": "top_section"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,85 @@
+<link rel="stylesheet" href="{{ 'image-gallery.css' | asset_url}}">
+
+<div class="page-width image-gallery">
+  <div class="image_gallery_header">
+    {%  if section.settings.heading_text != blank%}
+    <h2> {{ section.settings.heading_text }}</h2>
+      {% endif %}
+    {%  if section.settings.button_text != blank and section.settings.button_url != blank%}
+    <a class="button button-primary image-gallery_button" href="{{ section.settings.button_url }}">
+    {{ section.settings.button_text }}
+    </a>
+      {% endif %}
+  </div>
+</div>
+
+<div class="image-gallery_content">
+  {% for block in section.settings.blocks %}
+    <div class="image-gallery+contentitem">
+      
+    </div>
+  
+</div>
+
+{% schema %}
+  {
+    "name": "Image gallery",
+    "tag": "section",
+    "class" : "section",
+    "settings": [
+      {
+        "type":"text",
+        "id":"heading_text",
+        "label":"Heading Text",
+        "default": "Image Gallery Heading"
+      },
+      {
+        "type":"text",
+        "id":"button_text",
+        "label":"Button Text",
+        "default": "Button Text"
+      },
+      {
+        "type":"url",
+        "id":"button_link",
+        "label":"Button URL"
+      }
+    ],
+    "blocks":[
+      {
+      "type": "image-item",
+      "name": "Image item",
+        "limit" : 6,
+      "settings": [
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Image",
+          "info" : "1200 x 800 px .jpg recommended"
+        },
+        {
+        "type":"richtext",
+        "id":"para_text",
+        "label":"Paragraph Text",
+        "default": "Paragraph"
+      },
+      {
+        "type":"text",
+        "id":"button_text",
+        "label":"Button Text",
+        "default": "Button Text"
+      },
+      {
+        "type":"url",
+        "id":"button_link",
+        "label":"Button URL"
+      }
+    ],
+    "presets":[
+      {
+        "name":"Image gallery"
+      }
+    ]
+  }
+}
+{% endschema %}

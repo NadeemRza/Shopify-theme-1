@@ -1,0 +1,89 @@
+<div class="richtext richtext-{{section.id}} {{section.settings.text_alignment}}">
+  <div class="container">
+    <div class="richtext__wrapper">
+      {% if section.settings.heading_text != blank %}
+        <h2 class="richtext__heading">{{ section.settings.heading_text }}</h2>
+      {% endif %}
+
+      {% if section.settings.para_text != blank %}
+        <p class="richtext__paragraph">{{ section.settings.para_text }}</p>
+      {% endif %}
+
+      {% if section.settings.button_link != blank or section.settings.button_text != blank %}
+        <div class="richtext__button">
+          <a class="button button--primary" href="{{section.settings.button_link}}">
+            {{ section.settings.button_text }}
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% style %}
+  .richtext-{{ section.id}}{
+    background-color: {{ section.settings.bcg_color}}
+    ;
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Richtext",
+    "tag": "section",
+    "class": "homepage-section",
+    "settings": [
+
+      {
+        "type": "color",
+        "id": "bcg_color",
+        "label": "Background Color",
+        "default": "#ece2cc"
+      },
+      {
+        "type": "text",
+        "id": "heading_text",
+        "label": "Heading Text",
+        "default": "5 STAR FEEDBACK"
+      },
+      {
+        "type": "richtext",
+        "id": "para_text",
+        "label": "Paragraph Text",
+        "default": "<p>lorem ipsum sit emit fg khf lorem ipsum sit amit lorem ipsum sit amit</p>"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Text",
+        "default": "Button Text"
+      }, {
+        "type": "url",
+        "id": "button_link",
+        "label": "Link"
+      }, {
+        "type": "select",
+        "id": "text_alignment",
+        "label": "Alignment",
+        "options": [
+          {
+            "value": "left-align",
+            "label": "Left"
+          }, {
+            "value": "center-align",
+            "label": "Center"
+          }, {
+            "value": "right-align",
+            "label": "Right"
+          }
+        ],
+        "default": "center-align"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Richtext"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,145 @@
+<div class="font-{{section.id}}">
+  <h2 class="h-{{ section.id}}">{{ section.settings.heading_text }}</h2>
+  <p class="p-{{section.id}}">{{ section.settings.text_description }}</p>
+</div>
+
+{% style %}
+  .h-{{ section.id}}{
+    font-size: {{ section.settings.font_size}}
+    px;
+    line-height: {{ section.settings.line_height}}
+    px;
+    font-weight: {{ section.settings.heading_font_weight}}
+    ;
+    color: {{ section.settings.heading_color}}
+    ;
+    text-transform: {{ section.settings.heading_text_transform}}
+    ;
+  };
+  .font-{{ section.id}}{
+    font-family: "{{ section.settings.text_font}}"
+  }
+  .p-{{ section.id}}{
+    color: {{ section.settings.paragraph_color}}
+    ;
+    font-weight: {{ section.settings.paragraph_font_weight}}
+    ;
+    text-transform: {{ section.settings.paragraph_text_transform}}
+
+
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "text customization",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading_text",
+        "label": "Heading text",
+        "default": "This is a heading"
+      },
+      {
+        "type": "textarea",
+        "id": "text_description",
+        "label": "Enter Text Here",
+        "default": "Welcome to my shop!"
+      },
+      {
+        "type": "range",
+        "id": "font_size",
+        "min": 15,
+        "max": 80,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size",
+        "default": 15
+      },
+      {
+        "type": "range",
+        "id": "line_height",
+        "min": 1,
+        "max": 3,
+        "step": 0.1,
+        "label": "Line Height",
+        "default": 1
+      }, {
+        "type": "font_picker",
+        "id": "text_font",
+        "label": "Heading font",
+        "default": "helvetica_n4"
+      }, {
+        "type": "range",
+        "id": "heading_font_weight",
+        "min": 100,
+        "max": 900,
+        "step": 100,
+        "label": "Heading Font Weight",
+        "default": 300
+      }, {
+        "type": "range",
+        "id": "paragraph_font_weight",
+        "min": 100,
+        "max": 500,
+        "step": 100,
+        "label": "Paragraph Font Weight",
+        "default": 100
+      }, {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading Color",
+        "default": "#E21717"
+      }, {
+        "type": "color",
+        "id": "paragraph_color",
+        "label": "Paragraph Color",
+        "default": "#120E43"
+      }, {
+        "type": "select",
+        "id": "heading_text_transform",
+        "label": "Heading Text Transformation",
+        "options": [
+          {
+            "value": "uppercase",
+            "label": "UpperCase"
+          }, {
+            "value": "lowercase",
+            "label": "LowerCase"
+          }, {
+            "value": "capitalize",
+            "label": "Capitalize"
+          }
+        ],
+        "default": "capitalize"
+      }, {
+        "type": "select",
+        "id": "paragraph_text_transform",
+        "label": "Pragraph Text Transformation",
+        "options": [
+          {
+            "value": "uppercase",
+            "label": "UpperCase"
+          }, {
+            "value": "lowercase",
+            "label": "LowerCase"
+          }, {
+            "value": "capitalize",
+            "label": "Capitalize"
+          }
+        ],
+        "default": "capitalize"
+      }
+
+
+
+    ],
+    "presets": [
+      {
+        "name": "text customization"
+      }
+    ]
+  }
+{% endschema %}

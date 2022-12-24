@@ -1,0 +1,182 @@
+{% if section.blocks.size > 0 %}
+  <div class="block-container">
+    <div class="flexbox">
+      {% for block in section.blocks %}
+        <div class="flexbox_items">
+          <div class="content-image">
+            <div class="image_item">
+              {% if blocks.settings.image != blank %}
+                {% assign mobile_image = block.settings.image_mobile | default: block.settings.image %}
+                {% render 'image', class: '', mobileSrc: mobile_image, desktopSrc: block.settings.image %}
+              {% endif %}
+            </div>
+          </div>
+          <div class="image-item__content">
+            {% if block.settings.heading_text != blank %}
+              <h2 class="heading--{{block.id}}">{{ block.settings.heading_text }}</h2>
+            {% endif %}
+
+            {% if block.settings.paragraph_text != blank %}
+              {{ block.settings.paragraph_text }}
+            {% endif %}
+
+            {% if block.settings.button_text != blank or block.settings.button_link != blank %}
+              <a href='{{block.settings.button_link}}' class='button button--primary {{button--{{ block.id}}}}'>{{ button.settings.button_text }}</a>
+            {% endif %}
+
+          </div>
+
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+{% style %}
+  {% for block in section.blocks %}
+    .heading--{{ block.id}}{
+      color: {{ block.heading_text_color}}
+    }
+    .paragraph--{{ block.id}}{
+      color: {{ block.paragraph_text_color}}
+    }
+    .button--{{ block.id}}{
+      color: {{ block.button_text_color}}
+      ;
+      background-color: {{ block.button_background_color}}
+    }
+  {% endfor %}
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "three blocks section",
+    "class": "homepage section",
+    "blocks": [
+      {
+        "name": "block section",
+        "type": "block section",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Background"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image (Mobile)",
+            "info": "600 x 800px .jpg recommended"
+          },
+          {
+            "type": "header",
+            "content": "Content"
+          }, {
+            "type": "text",
+            "id": "heading_text",
+            "label": "Heading Text",
+            "default": "About Company"
+          }, {
+            "type": "color",
+            "id": "heading_text_color",
+            "label": "Heading color",
+            "default": "#000"
+          }, {
+            "type": "richtext",
+            "id": "paragraph_text",
+            "label": "Paragraph Text",
+            "default": "<p>lorem ipsum sit emit fg khf lorem ipsum sit amit lorem ipsum sit amit</p>"
+          }, {
+            "type": "color",
+            "id": "paragraph_text_color",
+            "label": "Paragraph color",
+            "default": "#000"
+          }, {
+            "type": "text",
+            "id": "button_text",
+            "label": "Text",
+            "default": "Our Products"
+          }, {
+            "type": "url",
+            "id": "button_link",
+            "label": "Link"
+          }, {
+            "type": "color",
+            "id": "button_background_color",
+            "label": "Button Background color",
+            "default": "#555"
+          }, {
+            "type": "color",
+            "id": "button_text_color",
+            "label": "Button Text color",
+            "default": "#000"
+          }, {
+            "type": "select",
+            "id": "content_position",
+            "label": "Content position",
+            "options": [
+              {
+                "value": "align-start justify-start",
+                "label": "Top left"
+              },
+              {
+                "value": "align-start justify-center",
+                "label": "Top center"
+              },
+              {
+                "value": "align-start justify-end",
+                "label": "Top right"
+              },
+              {
+                "value": "align-center justify-start",
+                "label": "Middle left"
+              }, {
+                "value": "align-center justify-center",
+                "label": "Middle center"
+              }, {
+                "value": "align-center justify-end",
+                "label": "Middle right"
+              }, {
+                "value": "align-end justify-start",
+                "label": "Bottom left"
+              }, {
+                "value": "align-end justify-center",
+                "label": "Bottom center"
+              }, {
+                "value": "align-end justify-end",
+                "label": "Bottom right"
+              }
+            ],
+            "default": "align-end justify-end"
+          }, {
+            "type": "select",
+            "id": "text_alignment",
+            "label": "Text Alignment",
+            "options": [
+              {
+                "value": "text-left",
+                "label": "Left"
+              }, {
+                "value": "text-center",
+                "label": "Center"
+              }, {
+                "value": "text-right",
+                "label": "Right"
+              }
+            ],
+            "default": "text-center"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "three blocks section"
+      }
+    ]
+  }
+{% endschema %}

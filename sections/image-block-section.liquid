@@ -1,0 +1,153 @@
+<h2>{{ section.settings.main_heading_text }}</h2>
+{% if section.blocks.size > 0 %}
+  <div class="flex block-container">
+    {% for block in section.settings %}
+      <div class="section">
+        {% if block.settings.image != blank or block.settings.image_mobile != blank %}
+          <div class="image-block__conatainer">
+            <div class="image-overlay__image">
+              {% assign mobile_image = block.settings.image_mobile | default: block.settings.image %}
+              {% render 'image', class: '', mobileSrc: mobile_image, desktopSrc: block.settings.image %}
+            </div>
+          {% endif %}
+          <div class="image-overlay__content">
+            <div class="h-full flex {{block.settings.content_position}}">
+              <div class="image-overlay__main-content {{block.settings.text_alignment}}">
+
+                {% if block.settings.heading_text != blank %}
+                  <h2>{{ block.settings.heading_text }}</h2>
+                {% endif %}
+
+                {% if block.settings.paragraph_text != blank %}
+                  <p>{{ block.settings.paragraph_text }}</p>
+                {% endif %}
+
+                {% if block.settings.button_url != blank or block.settings.button_text != blank %}
+                  <a href="{{block.settings.button_url}}" class="button button--primary">
+                    {{ block.settings.button_text }}
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "image block section",
+    "class": "homepage section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "main_heading_text",
+        "label": "Main Heading",
+        "default": "Image Gallery"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "blocks",
+        "type": "blocks",
+        "limit": 8,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Desktop Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Mobile Image"
+          },
+          {
+            "type": "text",
+            "id": "heading_text",
+            "label": "Heading Text",
+            "default": "About Company"
+          },
+          {
+            "type": "textarea",
+            "id": "paragraph_text",
+            "label": "Paragraph Text",
+            "default": "<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum sed delectus exercitationem.</p>"
+          }, {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text",
+            "default": "Shop Now"
+          }, {
+            "type": "url",
+            "id": "button_url",
+            "label": "Button Link"
+          }, {
+            "type": "select",
+            "id": "content_position",
+            "label": "Content position",
+            "options": [
+              {
+                "value": "align-start justify-start",
+                "label": "Top left"
+              },
+              {
+                "value": "align-start justify-center",
+                "label": "Top center"
+              },
+              {
+                "value": "align-start justify-end",
+                "label": "Top right"
+              },
+              {
+                "value": "align-center justify-start",
+                "label": "Middle left"
+              }, {
+                "value": "align-center justify-center",
+                "label": "Middle center"
+              }, {
+                "value": "align-center justify-end",
+                "label": "Middle right"
+              }, {
+                "value": "align-end justify-start",
+                "label": "Bottom left"
+              }, {
+                "value": "align-end justify-center",
+                "label": "Bottom center"
+              }, {
+                "value": "align-end justify-end",
+                "label": "Bottom right"
+              }
+            ],
+            "default": "align-center justify-center"
+          }, {
+            "type": "select",
+            "id": "text_alignment",
+            "label": "Text Alignment",
+            "options": [
+              {
+                "value": "left-align",
+                "label": "Left"
+              }, {
+                "value": "center-align",
+                "label": "Center"
+              }, {
+                "value": "right-align",
+                "label": "Right"
+              }
+            ],
+            "default": "center-align"
+          }
+        ]
+
+      }
+    ],
+    "presets": [
+      {
+        "name": "image block section"
+      }
+    ]
+  }
+{% endschema %}

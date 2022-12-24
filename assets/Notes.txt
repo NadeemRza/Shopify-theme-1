@@ -1,0 +1,2 @@
+Testimonial Section -- testimonial-section-new.liquid  -- Shopify
+Slider Section -- main-slideshow.liquid  -- Shopify1

@@ -1,0 +1,120 @@
+<div class="section">
+  <div class="image-overlay__container">
+    <div class="image-overlay__image">
+      {% assign mobile_image = section.settings.image_mobile | default: section.settings.image %}
+      {% render 'image', class: '', mobileSrc: mobile_image, desktopSrc: section.settings.image %}
+    </div>
+    <div class="image-overlay__content">
+      <div class="h-full flex {{section.settings.content_position}}">
+        <div class="image-overlay__main-content {{section.settings.text_alignment}}">
+          <h2>{{ section.settings.heading_text }}</h2>
+          <p>{{ section.settings.paragraph_text }}</p>
+          <a href="{{section.settings.button_url}}" class="button button--primary">
+            {{ section.settings.button_text }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "image text overlay",
+    "tag": "section",
+    "class": "homepage section",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Desktop Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Mobile Image"
+      },
+      {
+        "type": "text",
+        "id": "heading_text",
+        "label": "Heading Text",
+        "default": "About Company"
+      },
+      {
+        "type": "textarea",
+        "id": "paragraph_text",
+        "label": "Paragraph Text",
+        "default": "<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum sed delectus exercitationem.</p>"
+      }, {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Shop Now"
+      }, {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button Link"
+      }, {
+        "type": "select",
+        "id": "content_position",
+        "label": "Content position",
+        "options": [
+          {
+            "value": "align-start justify-start",
+            "label": "Top left"
+          },
+          {
+            "value": "align-start justify-center",
+            "label": "Top center"
+          },
+          {
+            "value": "align-start justify-end",
+            "label": "Top right"
+          },
+          {
+            "value": "align-center justify-start",
+            "label": "Middle left"
+          }, {
+            "value": "align-center justify-center",
+            "label": "Middle center"
+          }, {
+            "value": "align-center justify-end",
+            "label": "Middle right"
+          }, {
+            "value": "align-end justify-start",
+            "label": "Bottom left"
+          }, {
+            "value": "align-end justify-center",
+            "label": "Bottom center"
+          }, {
+            "value": "align-end justify-end",
+            "label": "Bottom right"
+          }
+        ],
+        "default": "align-center justify-center"
+      }, {
+        "type": "select",
+        "id": "text_alignment",
+        "label": "Text Alignment",
+        "options": [
+          {
+            "value": "left-align",
+            "label": "Left"
+          }, {
+            "value": "center-align",
+            "label": "Center"
+          }, {
+            "value": "right-align",
+            "label": "Right"
+          }
+        ],
+        "default": "center-align"
+      }
+    ],
+    "presets": [
+      {
+        "name": "image text overlay"
+      }
+    ]
+  }
+{% endschema %}

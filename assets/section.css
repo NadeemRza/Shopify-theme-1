@@ -72,12 +72,13 @@
 .flex-box{
     display: flex;
     flex-wrap: wrap;
+    width: 80%;
     max-width: 1400px;
-    margin: 0 -20px;
+    margin: 0 auto;
+    justify-content: space-between;
 }
 
 .flexbox_item{
-    padding: 0 10px;
     width: 100%;
 }
 
@@ -100,6 +101,10 @@
     .image-text__content{
         padding: 30px;
     }
+}
+/*****************Image Alignment*********************/
+.img-right{
+    flex-direction: row-reverse;
 }
 
 
@@ -233,4 +238,5 @@
 .block-container{
     width: 100%;
 }
+
 

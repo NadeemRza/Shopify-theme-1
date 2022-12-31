@@ -1,0 +1,54 @@
+{% if section.settings.blog.articles.size > 0 %}
+  <div class="blogpost-container container">
+    <div class="blogpost-content flex">
+      {% for article in section.settings.blog.articles limit: 4 %}
+        <div>
+          {% render 'blog-card', article: article %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+{% style %}
+  .blogpost-container {
+    max-height: 13rem;
+  }
+
+  .blogpost-content {
+    gap: 0 0.85rem;
+  }
+
+  .article-card__button {
+    background-color: #261d09;
+    color: #fff;
+    border-radius: 0.5rem;
+  }
+
+  .article-card__date {
+    background-color: #f5d284;
+    color: #ffff;
+    padding: 0.25rem 0.92rem;
+    border-radius: 0.5rem;
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Blogpost Section",
+    "class": "homepage section",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "blog",
+        "id": "blog",
+        "label": "Choose a Blog"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Blogpost Section"
+      }
+    ]
+  }
+{% endschema %}
